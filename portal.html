@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Fornecedores — Treinamento APP</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f0f4f8;--surface:#fff;--border:#e2e8f0;
+  --text:#1a202c;--muted:#718096;--light:#a0aec0;
+  --blue:#2563eb;--blue-l:#eff6ff;--blue-b:#bfdbfe;--blue-d:#1d4ed8;
+  --green:#16a34a;--green-l:#f0fdf4;--green-b:#bbf7d0;
+  --red:#dc2626;--red-l:#fef2f2;--red-b:#fecaca;
+  --yellow:#ca8a04;--yellow-l:#fefce8;--yellow-b:#fde68a;
+  --purple:#7c3aed;--purple-l:#f5f3ff;--purple-b:#ddd6fe;
+  --orange:#ea580c;--orange-l:#fff7ed;--orange-b:#fed7aa;
+  --gray:#6b7280;--gray-l:#f9fafb;--gray-b:#e5e7eb;
+  --pink:#db2777;--pink-l:#fdf2f8;--pink-b:#fbcfe8;
+  --radius:12px;--font:'Poppins',sans-serif;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;min-height:100vh}
+
+/* HEADER */
+.header{background:var(--blue);color:white;padding:0}
+.header-top{max-width:1280px;margin:0 auto;padding:20px 24px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.header-brand{display:flex;align-items:center;gap:12px}
+.header-icon{width:40px;height:40px;background:rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.header-title{font-size:18px;font-weight:700;line-height:1.2}
+.header-sub{font-size:12px;opacity:.75}
+.header-stats{display:flex;gap:24px}
+.header-stat{text-align:center}
+.header-stat .val{font-size:22px;font-weight:700;display:block}
+.header-stat .lbl{font-size:11px;opacity:.75}
+.header-bottom{max-width:1280px;margin:0 auto;padding:20px 24px}
+.search-bar{display:flex;gap:10px;flex-wrap:wrap}
+.search-wrap{flex:1;min-width:240px;position:relative}
+.search-wrap svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;opacity:.6}
+.search-main{width:100%;padding:12px 14px 12px 42px;border:none;border-radius:10px;font-size:14px;font-family:var(--font);outline:none;background:rgba(255,255,255,.15);color:white}
+.search-main::placeholder{color:rgba(255,255,255,.6)}
+.search-main:focus{background:rgba(255,255,255,.25)}
+.filter-sel{padding:12px 14px;border:none;border-radius:10px;font-size:13px;font-family:var(--font);outline:none;background:rgba(255,255,255,.15);color:white;cursor:pointer}
+.filter-sel option{background:var(--blue-d);color:white}
+
+/* CONTENT */
+.content{max-width:1280px;margin:0 auto;padding:24px}
+.section-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+.section-title{font-size:15px;font-weight:700}
+.section-count{font-size:13px;color:var(--muted);background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:4px 12px}
+
+/* CHIPS */
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.chip{padding:6px 14px;border-radius:20px;border:1.5px solid var(--border);background:var(--surface);font-size:12px;font-weight:600;cursor:pointer;color:var(--muted);white-space:nowrap;transition:all .15s;font-family:var(--font)}
+.chip:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-l)}
+.chip.active{background:var(--blue);border-color:var(--blue);color:white}
+
+/* CARDS GRID */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+
+/* CARD */
+.forn-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:20px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.forn-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--status-color,var(--blue))}
+.forn-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,99,235,.12)}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px}
+.card-avatar{width:44px;height:44px;border-radius:10px;background:var(--status-color-l,var(--blue-l));display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--status-color,var(--blue));flex-shrink:0;font-family:var(--font)}
+.card-name{font-size:13px;font-weight:700;line-height:1.3;color:var(--text);flex:1}
+.card-city{font-size:11px;color:var(--muted);margin-top:2px;display:flex;align-items:center;gap:4px}
+.card-status{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:20px;font-size:10px;font-weight:700;border:1px solid;white-space:nowrap;margin-top:10px}
+.card-footer{margin-top:14px;padding-top:12px;border-top:1px solid var(--border);display:flex;gap:10px}
+.card-badge{display:flex;align-items:center;gap:4px;font-size:11px;font-weight:500}
+.card-badge.ok{color:var(--green)}
+.card-badge.no{color:var(--light)}
+
+/* EMPTY */
+.empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty svg{width:48px;height:48px;margin:0 auto 16px;opacity:.3;display:block}
+.empty p{font-size:14px}
+
+/* OVERLAY */
+.overlay{position:fixed;inset:0;background:rgba(15,23,42,.6);z-index:1000;display:none;align-items:flex-end;justify-content:center;padding:0}
+.overlay.open{display:flex}
+@media(min-width:640px){.overlay{align-items:center;padding:20px}}
+
+/* MODAL */
+.modal{background:var(--surface);width:100%;max-width:560px;border-radius:20px 20px 0 0;max-height:92vh;overflow-y:auto;box-shadow:0 -8px 40px rgba(0,0,0,.2);animation:slideUp .3s ease}
+@media(min-width:640px){.modal{border-radius:20px;animation:fadeIn .2s ease}}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.modal-drag{width:40px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 0;display:block}
+@media(min-width:640px){.modal-drag{display:none}}
+
+.modal-header{padding:20px 24px;display:flex;align-items:flex-start;gap:14px;border-bottom:1px solid var(--border)}
+.modal-avatar{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;flex-shrink:0;font-family:var(--font)}
+.modal-title{font-size:16px;font-weight:700;line-height:1.3;margin-bottom:4px}
+.modal-city{font-size:13px;color:var(--muted)}
+.modal-close{width:34px;height:34px;border:1px solid var(--border);border-radius:8px;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);flex-shrink:0;margin-left:auto;font-size:16px}
+.modal-close:hover{background:var(--bg)}
+
+.modal-body{padding:20px 24px}
+
+/* INFO SECTIONS */
+.info-section{margin-bottom:20px}
+.info-section-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.info-item{background:var(--bg);border-radius:8px;padding:12px}
+.info-item.full{grid-column:1/-1}
+.info-lbl{font-size:10px;font-weight:600;color:var(--light);text-transform:uppercase;margin-bottom:4px}
+.info-val{font-size:13px;font-weight:600;color:var(--text)}
+.info-val.ok{color:var(--green)}
+.info-val.no{color:var(--red)}
+.info-val.muted{color:var(--muted);font-weight:400}
+
+/* APP STATUS BIG */
+.app-status-card{border-radius:10px;padding:16px;margin-bottom:20px;display:flex;align-items:center;gap:14px}
+.app-status-card.instalado{background:var(--green-l);border:1px solid var(--green-b)}
+.app-status-card.nao-instalado{background:var(--red-l);border:1px solid var(--red-b)}
+.app-status-icon{font-size:28px;flex-shrink:0}
+.app-status-text strong{display:block;font-size:14px;font-weight:700}
+.app-status-text span{font-size:12px;color:var(--muted)}
+.app-status-card.instalado .app-status-text strong{color:var(--green)}
+.app-status-card.nao-instalado .app-status-text strong{color:var(--red)}
+
+/* PILL */
+.pill{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid}
+
+/* PROD MINI */
+.prod-mini{background:var(--bg);border-radius:10px;padding:14px;margin-bottom:8px}
+.prod-mini-title{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.prod-mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.prod-mini-item{text-align:center}
+.prod-mini-val{font-size:18px;font-weight:700;color:var(--blue);display:block}
+.prod-mini-lbl{font-size:10px;color:var(--muted)}
+
+/* LOADING */
+.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px;gap:16px;color:var(--muted)}
+.spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* PROG BAR */
+.prog-wrap{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:6px}
+.prog-fill{height:100%;border-radius:3px}
+
+/* FOOTER */
+.footer{text-align:center;padding:32px 24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:40px}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="header-brand">
+      <div class="header-icon">🚑</div>
+      <div>
+        <div class="header-title">Portal Fornecedores</div>
+        <div class="header-sub">Acompanhamento de Implantação & Treinamento do APP</div>
+      </div>
+    </div>
+    <div class="header-stats">
+      <div class="header-stat"><span class="val" id="h-total">—</span><span class="lbl">Fornecedores</span></div>
+      <div class="header-stat"><span class="val" id="h-trained">—</span><span class="lbl">Treinados</span></div>
+      <div class="header-stat"><span class="val" id="h-pct">—</span><span class="lbl">Progresso</span></div>
+    </div>
+  </div>
+  <div class="header-bottom">
+    <div class="search-bar">
+      <div class="search-wrap">
+        <svg viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="2"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4" stroke-linecap="round"/></svg>
+        <input type="text" class="search-main" id="search" placeholder="Buscar fornecedor por nome ou cidade...">
+      </div>
+      <select class="filter-sel" id="filter-status" onchange="applyFilter()">
+        <option value="">Todos os Status</option>
+        <option>TREINADO</option><option>EM USO</option><option>AGENDADO</option>
+        <option>INATIVA</option><option>POSSUI IOS</option><option>IRIS/EZRA</option>
+        <option>OBJEÇÃO</option><option>VAI USAR OUTRO SISTEMA</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- LOADING -->
+  <div id="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Carregando fornecedores...</p>
+  </div>
+
+  <!-- MAIN -->
+  <div id="main-content" style="display:none">
+    <div class="chips" id="chips"></div>
+    <div class="section-row">
+      <span class="section-title" id="section-title">Fornecedores</span>
+      <span class="section-count" id="section-count">—</span>
+    </div>
+    <div class="cards-grid" id="cards-grid"></div>
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-drag"></div>
+    <div class="modal-header">
+      <div class="modal-avatar" id="m-avatar">A</div>
+      <div style="flex:1;min-width:0">
+        <div class="modal-title" id="m-title">—</div>
+        <div class="modal-city" id="m-city">—</div>
+        <div style="margin-top:6px" id="m-pill"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="m-body">—</div>
+  </div>
+</div>
+
+<div class="footer">
+  Portal de Acompanhamento — Implantação & Treinamento do APP · Dados sincronizados via Firebase
+</div>
+
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAzbaiezNU2NqFj6BI7dsRNEiRBW7QzCVY",
+  authDomain: "fornecedor-cc2a3.firebaseapp.com",
+  projectId: "fornecedor-cc2a3",
+  storageBucket: "fornecedor-cc2a3.firebasestorage.app",
+  messagingSenderId: "621041200098",
+  appId: "1:621041200098:web:401039ec2d9f1905dde7bb"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function loadData(){
+  try{
+    const [fsSnap, prodSnap] = await Promise.all([
+      getDocs(collection(db,'fornecedores')),
+      getDocs(collection(db,'producao'))
+    ]);
+    const forn = fsSnap.docs.map(d=>({id:d.id,...d.data()}));
+    const prod = prodSnap.docs.map(d=>({id:d.id,...d.data()}));
+    window._forn = forn;
+    window._prod = prod;
+    window._ready = true;
+    initPortal();
+  }catch(e){
+    document.getElementById('loading').innerHTML='<p style="color:#dc2626">Erro ao carregar dados. Verifique a conexão.</p>';
+  }
+}
+loadData();
+</script>
+
+<script>
+// ── STATUS CONFIG ──
+const SCFG={
+  'TREINADO':    {color:'#16a34a',colorL:'#f0fdf4',pill:'color:#16a34a;background:#f0fdf4;border-color:#bbf7d0'},
+  'EM USO':      {color:'#2563eb',colorL:'#eff6ff',pill:'color:#2563eb;background:#eff6ff;border-color:#bfdbfe'},
+  'AGENDADO':    {color:'#ca8a04',colorL:'#fefce8',pill:'color:#ca8a04;background:#fefce8;border-color:#fde68a'},
+  'INATIVA':     {color:'#6b7280',colorL:'#f9fafb',pill:'color:#6b7280;background:#f9fafb;border-color:#e5e7eb'},
+  'POSSUI IOS':  {color:'#7c3aed',colorL:'#f5f3ff',pill:'color:#7c3aed;background:#f5f3ff;border-color:#ddd6fe'},
+  'IRIS/EZRA':   {color:'#db2777',colorL:'#fdf2f8',pill:'color:#db2777;background:#fdf2f8;border-color:#fbcfe8'},
+  'OBJEÇÃO':     {color:'#dc2626',colorL:'#fef2f2',pill:'color:#dc2626;background:#fef2f2;border-color:#fecaca'},
+  'VAI USAR OUTRO SISTEMA':{color:'#ea580c',colorL:'#fff7ed',pill:'color:#ea580c;background:#fff7ed;border-color:#fed7aa'},
+};
+const TRAINED=['TREINADO','EM USO','IRIS/EZRA'];
+
+let allF=[], filtF=[], activeChip='TODOS';
+
+function initPortal(){
+  allF = window._forn || [];
+  filtF = [...allF];
+  renderHeader();
+  buildChips();
+  applyFilter();
+  document.getElementById('loading').style.display='none';
+  document.getElementById('main-content').style.display='block';
+}
+
+function renderHeader(){
+  const tot=allF.length;
+  const trained=allF.filter(r=>TRAINED.includes(r.status)).length;
+  document.getElementById('h-total').textContent=tot;
+  document.getElementById('h-trained').textContent=trained;
+  document.getElementById('h-pct').textContent=tot?Math.round(trained/tot*100)+'%':'—';
+}
+
+function buildChips(){
+  const statuses=['TODOS',...new Set(allF.map(r=>r.status||'SEM STATUS').filter(Boolean))];
+  document.getElementById('chips').innerHTML=statuses.map(s=>{
+    const cfg=SCFG[s];
+    return`<button class="chip ${s==='TODOS'?'active':''}" onclick="setChip('${s.replace(/'/g,"\\'")}')">${s}</button>`;
+  }).join('');
+}
+
+function setChip(s){
+  activeChip=s;
+  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active',c.textContent===s));
+  document.getElementById('filter-status').value=s==='TODOS'?'':s;
+  applyFilter();
+}
+
+document.getElementById('search').addEventListener('input',applyFilter);
+function applyFilter(){
+  const q=document.getElementById('search').value.toLowerCase().trim();
+  const st=document.getElementById('filter-status').value;
+  filtF=allF.filter(r=>{
+    const nm=((r.nome||r.nomeCompleto||'')+(r.cidade||'')).toLowerCase();
+    return(!q||nm.includes(q))&&(!st||(r.status||'')==st);
+  });
+  renderCards();
+}
+
+function initials(name){
+  return (name||'?').split(/[\s-]+/).filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase()||'?';
+}
+
+function renderCards(){
+  const grid=document.getElementById('cards-grid');
+  document.getElementById('section-count').textContent=`${filtF.length} fornecedor${filtF!==1?'es':''}`;
+
+  if(!filtF.length){
+    grid.innerHTML=`<div class="empty" style="grid-column:1/-1">
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="24" cy="20" r="8"/><path d="M8 40c0-8 7-14 16-14s16 6 16 14"/></svg>
+      <p>Nenhum fornecedor encontrado</p>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML=filtF.map((r,i)=>{
+    const cfg=SCFG[r.status]||{color:'#6b7280',colorL:'#f9fafb',pill:'color:#6b7280;background:#f9fafb;border-color:#e5e7eb'};
+    const nome=r.nome||r.nomeCompleto||'—';
+    const ini=initials(nome);
+    const appOk=(r.app||r.appInstalado)==='SIM';
+    const andOk=(r.android||r.celularAndroid)==='SIM';
+    const gpsOk=(r.gps||r.rastreadorGPS)==='SIM';
+    return`<div class="forn-card" style="--status-color:${cfg.color};--status-color-l:${cfg.colorL}" onclick='openModal(${JSON.stringify(r.id)})'>
+      <div class="card-top">
+        <div class="card-avatar">${ini}</div>
+        <div style="flex:1;min-width:0">
+          <div class="card-name">${nome}</div>
+          <div class="card-city">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5.5" cy="4" r="2"/><path d="M5.5 10C5.5 10 2 7 2 4a3.5 3.5 0 017 0c0 3-3.5 6-3.5 6z" stroke-linejoin="round"/></svg>
+            ${r.cidade||'Cidade não informada'}
+          </div>
+        </div>
+      </div>
+      <span class="card-status pill" style="${cfg.pill}">${r.status||'—'}</span>
+      <div class="card-footer">
+        <span class="card-badge ${appOk?'ok':'no'}">
+          ${appOk?'<svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 5.5l3 3 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>':'<svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 2l7 7M9 2L2 9" stroke-linecap="round"/></svg>'}
+          APP
+        </span>
+        <span class="card-badge ${andOk?'ok':'no'}">
+          ${andOk?'✓':'✗'} Android
+        </span>
+        <span class="card-badge ${gpsOk?'ok':'no'}">
+          ${gpsOk?'✓':'✗'} GPS
+        </span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── MODAL ──
+function openModal(id){
+  const r=allF.find(x=>x.id===id);if(!r)return;
+  const cfg=SCFG[r.status]||{color:'#6b7280',colorL:'#f9fafb',pill:'color:#6b7280;background:#f9fafb;border-color:#e5e7eb'};
+  const nome=r.nome||r.nomeCompleto||'—';
+  const ini=initials(nome);
+  const appOk=(r.app||r.appInstalado)==='SIM';
+  const dt=r.dtTreinamento?new Date(r.dtTreinamento).toLocaleDateString('pt-BR'):'Não informada';
+  const dtApres=r.dtApresentacao?new Date(r.dtApresentacao).toLocaleDateString('pt-BR'):'Não informada';
+
+  document.getElementById('m-avatar').textContent=ini;
+  document.getElementById('m-avatar').style.cssText=`background:${cfg.colorL};color:${cfg.color};width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;flex-shrink:0;font-family:var(--font)`;
+  document.getElementById('m-title').textContent=nome;
+  document.getElementById('m-city').textContent=(r.cidade?r.cidade:'')+((r.estado&&r.estado.trim())?' — '+r.estado:'');
+  document.getElementById('m-pill').innerHTML=`<span class="pill" style="${cfg.pill}">${r.status||'—'}</span>`;
+
+  // Produção desse fornecedor
+  const prod=(window._prod||[]).filter(p=>(p.nomeCompleto||'').toUpperCase()===nome.toUpperCase());
+  const totAtend=prod.length;
+  const totKm=prod.reduce((s,p)=>s+(p.km||0),0);
+  const tokenPct=totAtend?Math.round(prod.filter(p=>p.token==='SIM').length/totAtend*100):0;
+
+  document.getElementById('m-body').innerHTML=`
+    <!-- APP STATUS -->
+    <div class="app-status-card ${appOk?'instalado':'nao-instalado'}">
+      <div class="app-status-icon">${appOk?'✅':'❌'}</div>
+      <div class="app-status-text">
+        <strong>${appOk?'APP Instalado':'APP Não Instalado'}</strong>
+        <span>${appOk?'O fornecedor já instalou o aplicativo':(r.motivoSemApp?'Motivo: '+r.motivoSemApp:'Motivo não informado')}</span>
+      </div>
+    </div>
+
+    <!-- TREINAMENTO -->
+    <div class="info-section">
+      <div class="info-section-title">Dados de Treinamento</div>
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-lbl">Data de Treinamento</div>
+          <div class="info-val ${r.dtTreinamento?'ok':'muted'}">${dt}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-lbl">Data de Apresentação</div>
+          <div class="info-val muted">${dtApres}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-lbl">Celular Android</div>
+          <div class="info-val ${(r.android||r.celularAndroid)==='SIM'?'ok':'no'}">${r.android||r.celularAndroid||'—'}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-lbl">Rastreador GPS</div>
+          <div class="info-val ${(r.gps||r.rastreadorGPS)==='SIM'?'ok':'no'}">${r.gps||r.rastreadorGPS||'—'}</div>
+        </div>
+        ${r.obs?`<div class="info-item full"><div class="info-lbl">Observações</div><div class="info-val muted">${r.obs}</div></div>`:''}
+      </div>
+    </div>
+
+    <!-- PRODUÇÃO -->
+    ${totAtend>0?`
+    <div class="info-section">
+      <div class="info-section-title">Produção (Dados Recentes)</div>
+      <div class="prod-mini">
+        <div class="prod-mini-grid">
+          <div class="prod-mini-item"><span class="prod-mini-val">${totAtend}</span><span class="prod-mini-lbl">Atendimentos</span></div>
+          <div class="prod-mini-item"><span class="prod-mini-val">${Math.round(totKm).toLocaleString('pt-BR')}</span><span class="prod-mini-lbl">KM Total</span></div>
+          <div class="prod-mini-item"><span class="prod-mini-val" style="color:${tokenPct>=70?'#16a34a':tokenPct>=40?'#ca8a04':'#dc2626'}">${tokenPct}%</span><span class="prod-mini-lbl">Uso TOKEN</span></div>
+        </div>
+        <div style="margin-top:10px">
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:4px"><span>Aderência ao APP</span><span>${tokenPct}%</span></div>
+          <div class="prog-wrap"><div class="prog-fill" style="width:${tokenPct}%;background:${tokenPct>=70?'#16a34a':tokenPct>=40?'#ca8a04':'#dc2626'}"></div></div>
+        </div>
+      </div>
+    </div>`:''}
+
+    <!-- STATUS INFO -->
+    <div class="info-section">
+      <div class="info-section-title">Status Atual</div>
+      <div class="info-item full">
+        <div class="info-lbl">Situação</div>
+        <div class="info-val">${getStatusDesc(r.status)}</div>
+      </div>
+    </div>
+  `;
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('overlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
+function getStatusDesc(s){
+  const d={
+    'TREINADO':'Fornecedor treinado e habilitado para utilizar o APP.',
+    'EM USO':'Fornecedor já está utilizando o APP ativamente.',
+    'AGENDADO':'Treinamento agendado — aguardando realização.',
+    'INATIVA':'Fornecedor inativo na plataforma.',
+    'POSSUI IOS':'Fornecedor utiliza dispositivo iOS — incompatível com o APP atual.',
+    'IRIS/EZRA':'Fornecedor utiliza sistema IRIS/EZRA.',
+    'OBJEÇÃO':'Fornecedor apresentou objeção ao uso do APP.',
+    'VAI USAR OUTRO SISTEMA':'Fornecedor optou por outro sistema de gestão.',
+  };
+  return d[s]||'Situação não especificada.';
+}
+
+// Wait for data
+let w=0;const wt=setInterval(()=>{if(window._ready||w++>30){clearInterval(wt);if(!window._ready)document.getElementById('loading').innerHTML='<p style="color:#dc2626;font-size:13px">Erro ao conectar. Recarregue a página.</p>';}},200);
+</script>
+</body>
+</html>
