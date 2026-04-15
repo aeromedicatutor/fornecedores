@@ -854,8 +854,8 @@ async function saveTreinamentoToFirebase(raw,bar,lbl){
 
   const gk=(row,...ns)=>{const keys=Object.keys(row);for(const n of ns)for(const k of keys)if(k.trim().toLowerCase().replace(/[\s_]/g,'')==n.toLowerCase().replace(/[\s_]/g,''))return row[k];return '';};
 
-  let done=0;
-  const batch=writeBatch(db);
+  let done=0, batchCount=0;
+  let batch=writeBatch(db);
   const uploadId=`upload_${Date.now()}`;
 
   for(const row of raw){
@@ -880,10 +880,15 @@ async function saveTreinamentoToFirebase(raw,bar,lbl){
     const ref=existId?doc(db,'fornecedores',existId):doc(collection(db,'fornecedores'));
     if(!existId)payload.createdAt=new Date().toISOString();
     batch.set(ref,payload,{merge:true});
-    done++;
-    if(done%400===0){await batch.commit();}
+    done++; batchCount++;
+    if(batchCount===400){
+      await batch.commit();
+      batch=writeBatch(db);
+      batchCount=0;
+      lbl.textContent=`Salvando... ${done} registros`;
+    }
   }
-  await batch.commit();
+  if(batchCount>0)await batch.commit();
 
   // Log upload
   await setDoc(doc(db,'uploads',uploadId),{tipo:'treinamento',total:done,criadoEm:new Date().toISOString(),arquivo:'planilha_treinamento'});
@@ -915,11 +920,11 @@ async function handleUploadProducao(file){
 }
 
 async function saveProducaoToFirebase(raw,bar,lbl){
-  const {collection,getDocs,doc,setDoc:fsSetDoc,writeBatch}=window._fs,db=window._db;
+  const {collection,doc,setDoc:fsSetDoc,writeBatch}=window._fs,db=window._db;
   const gk=(row,...ns)=>{const keys=Object.keys(row);for(const n of ns)for(const k of keys)if(k.trim().toLowerCase().replace(/[\s_]/g,'')==n.toLowerCase().replace(/[\s_]/g,''))return row[k];return '';};
   const uploadId=`upload_${Date.now()}`;
-  const batch=writeBatch(db);
-  let done=0;
+  let batch=writeBatch(db);
+  let done=0, batchCount=0;
 
   for(const row of raw){
     const nomeFull=String(gk(row,'Nome do fornecedor(Contingência)','Nomefornecedor','fornecedor')||'').trim();
@@ -946,10 +951,15 @@ async function saveProducaoToFirebase(raw,bar,lbl){
       uploadId,
       importadoEm:new Date().toISOString(),
     },{merge:true});
-    done++;
-    if(done%400===0)await batch.commit();
+    done++; batchCount++;
+    if(batchCount===400){
+      await batch.commit();
+      batch=writeBatch(db);
+      batchCount=0;
+      lbl.textContent=`Salvando... ${done} registros`;
+    }
   }
-  await batch.commit();
+  if(batchCount>0)await batch.commit();
   await fsSetDoc(doc(db,'uploads',uploadId),{tipo:'producao',total:done,criadoEm:new Date().toISOString()});
   bar.style.width='100%';lbl.textContent=`✓ ${done} registros de produção importados!`;
   showAlert(`${done} registros de produção importados!`,'success');
