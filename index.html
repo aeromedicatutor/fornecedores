@@ -553,10 +553,10 @@ getDocs(collection(db,'_ping')).then(()=>{
   document.getElementById('conn-dot').className='dot green';
   document.getElementById('conn-label').textContent='Firebase conectado';
   window._fbReady = true;
-  loadAll();
+  window._fbReady = true; setTimeout(()=>window.loadAll&&window.loadAll(),100);
 }).catch(()=>{
   document.getElementById('conn-label').textContent='Erro de conexão';
-  showAlert('Erro ao conectar ao Firebase.','error');
+  const el=document.getElementById('alert'); if(el){el.textContent='Erro ao conectar ao Firebase. Verifique as regras do Firestore.';el.className='alert error show';setTimeout(()=>el.className='alert',6000);}
 });
 </script>
 
@@ -625,7 +625,7 @@ function checkPw(){
 }
 
 // ── LOAD ALL ──
-async function loadAll(){
+window.loadAll = async function loadAll(){
   await Promise.all([loadFornecedores(), loadProducao(), loadUploadHistory()]);
   renderDashboard();
 }
@@ -915,7 +915,7 @@ async function handleUploadProducao(file){
 }
 
 async function saveProducaoToFirebase(raw,bar,lbl){
-  const {collection,getDocs,doc,setDoc,writeBatch}=window._fs,db=window._db;
+  const {collection,getDocs,doc,setDoc:fsSetDoc,writeBatch}=window._fs,db=window._db;
   const gk=(row,...ns)=>{const keys=Object.keys(row);for(const n of ns)for(const k of keys)if(k.trim().toLowerCase().replace(/[\s_]/g,'')==n.toLowerCase().replace(/[\s_]/g,''))return row[k];return '';};
   const uploadId=`upload_${Date.now()}`;
   const batch=writeBatch(db);
@@ -927,10 +927,11 @@ async function saveProducaoToFirebase(raw,bar,lbl){
     const atend=String(gk(row,'Nº do Atendimento','NdoAtendimento','atendimento')||'').trim();
     if(!atend)continue;
     const id=`${uploadId}_${atend}`;
+    const partes=nomeFull.includes(' - ')?nomeFull.split(' - '):[];
     batch.set(doc(db,'producao',id),{
       nomeCompleto:nomeFull,
-      nome:nomeFull.includes(' - ')?nomeFull.rsplit?' ': nomeFull.split(' - ').slice(0,-1).join(' - '):nomeFull,
-      cidade:nomeFull.includes(' - ')?nomeFull.split(' - ').pop().trim():'',
+      nome:partes.length>1?partes.slice(0,-1).join(' - '):nomeFull,
+      cidade:partes.length>1?partes[partes.length-1].trim():'',
       atendimento:parseInt(atend)||0,
       dataRegistro:String(gk(row,'Data do registro do atendimento')||''),
       dataRemocao:String(gk(row,'Data de remoção do atendimento')||''),
@@ -949,8 +950,7 @@ async function saveProducaoToFirebase(raw,bar,lbl){
     if(done%400===0)await batch.commit();
   }
   await batch.commit();
-  const {setDoc}=window._fs;
-  await setDoc(doc(db,'uploads',uploadId),{tipo:'producao',total:done,criadoEm:new Date().toISOString()});
+  await fsSetDoc(doc(db,'uploads',uploadId),{tipo:'producao',total:done,criadoEm:new Date().toISOString()});
   bar.style.width='100%';lbl.textContent=`✓ ${done} registros de produção importados!`;
   showAlert(`${done} registros de produção importados!`,'success');
   await loadProducao();
