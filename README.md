@@ -4,9 +4,61 @@ Sistema estático (HTML + CSS + JS puro, sem build e sem banco) para acompanhar 
 adoção do app IRIS pelos fornecedores de remoção.
 
 ```
-index.html    Consulta  — todo mundo vê, só leitura
+login.html    Entrada   — pede a senha antes de liberar as outras telas
+index.html    Consulta  — só leitura, sem caminho para o admin
 admin.html    Admin     — cadastro, edição, exclusão e publicação
-dados.json    A base    — única fonte de verdade
+dados.json    A base    — fornecedores e contratantes, única fonte de verdade
+```
+
+Duas abas nas duas telas: **Fornecedores** (178, empresas de remoção que usam o app) e
+**Contratantes** (144, identificados só pelo código, com produtos P1–P4 e controle de treinamento).
+
+### Contratantes e LGPD
+
+As razões sociais foram removidas do `dados.json`. Cada contratante aparece pelo código —
+`Contratante 7035`. O campo continua existindo no cadastro, opcional, caso um dia precise ser
+preenchido em ambiente controlado.
+
+Cada contratante tem agora **Treinado** (Sim/Não) e **Data do treinamento**. A base saiu com todos
+em `Não` e sem data, para você atualizar. A bolinha pulsa quando o contratante está treinado, do
+mesmo jeito que nos fornecedores.
+
+A Consulta não tem link para o Admin. Quem precisa editar acessa `admin.html` direto pela URL —
+é uma separação de conveniência, não de segurança: em site estático o arquivo continua público
+para quem souber o endereço.
+
+## Login
+
+A senha **não está em nenhum arquivo**. O que o `login.html` guarda é o resultado de 250 mil
+rodadas de PBKDF2-SHA256 sobre a senha somada a um sal aleatório. É operação de mão única: dá para
+conferir se o que foi digitado bate, não dá para voltar do hash até a senha. Abrir o DevTools e ler
+o código não revela nada utilizável.
+
+Ao acertar, grava-se um marcador no `sessionStorage`. As duas telas conferem esse marcador antes de
+desenhar qualquer coisa e mandam para o login se ele não existir. A sessão morre quando a aba fecha,
+e o botão **Sair** encerra na hora.
+
+### O que esse login não é
+
+Ele impede alguém de *ver* as telas pelo navegador. Ele não impede alguém de baixar o
+`dados.json` direto pela URL — em site estático o arquivo é servido publicamente, e nenhum
+JavaScript muda isso. Se os dados precisarem de sigilo real, os caminhos são: repositório privado
+com Pages restrito (exige plano pago), hospedagem com autenticação de verdade (Cloudflare Access,
+Netlify Identity, Vercel) ou cifrar o `dados.json` com a própria senha. Posso montar a versão
+cifrada quando fizer sentido.
+
+### Trocar a senha
+
+O hash foi gerado assim — rode com a senha nova e substitua `SAL` e `VERIFICADOR` no `login.html`,
+mais `SESSAO_OK` nas três telas:
+
+```python
+import hashlib, os
+senha = 'sua-senha-nova'
+sal = os.urandom(16).hex()
+verificador = hashlib.pbkdf2_hmac('sha256', senha.encode(), bytes.fromhex(sal), 250000, 32).hex()
+sessao = hashlib.sha256((verificador + '|sessao-iris').encode()).hexdigest()
+print(sal, verificador, sessao, sep='\n')
 ```
 
 ## Como os dados circulam
@@ -67,7 +119,8 @@ o motivo do impedimento quando existe (`Recusa/Objeção`, `iOS Incompatível`, 
 ## Como ler as bolinhas
 
 A bolinha grande, ao lado da situação, **pulsa quando o fornecedor já foi treinado** — verde se está
-usando, laranja se treinou e ainda não usa.
+usando, laranja se treinou e ainda não usa. Nos contratantes a bolinha não pulsa: verde é ativo,
+cinza é inativo. O pulso ficou reservado para o que está em movimento.
 
 As quatro bolinhas pequenas no rodapé do card são a trilha: Agendamento → Treinamento →
 App instalado → Em uso. As duas primeiras acendem em **laranja** (implantação), as duas últimas em

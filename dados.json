@@ -1,5 +1,5 @@
 {
- "atualizadoEm": "2026-07-28",
+ "atualizadoEm": "2026-07-29",
  "origem": "planilha_implantacao_fornecedores_IRIS.xlsx",
  "fornecedores": [
   {
@@ -3383,6 +3383,1753 @@
    "empresaGps": "",
    "telefone": "",
    "obs": ""
+  }
+ ],
+ "contratantes": [
+  {
+   "id": "c-7035",
+   "codigo": "7035",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P2"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-7037",
+   "codigo": "7037",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P2"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-7032",
+   "codigo": "7032",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1",
+    "P2"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-865",
+   "codigo": "865",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1",
+    "P2"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-264",
+   "codigo": "264",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-146",
+   "codigo": "146",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-7023",
+   "codigo": "7023",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1",
+    "P2"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-989",
+   "codigo": "989",
+   "nome": "",
+   "status": "Inativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-973",
+   "codigo": "973",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-988",
+   "codigo": "988",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-7017",
+   "codigo": "7017",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-7033",
+   "codigo": "7033",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P2"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-7029",
+   "codigo": "7029",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-7019",
+   "codigo": "7019",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-7034",
+   "codigo": "7034",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-7028",
+   "codigo": "7028",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P2"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-1001",
+   "codigo": "1001",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-7036",
+   "codigo": "7036",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-258",
+   "codigo": "258",
+   "nome": "",
+   "status": "Inativo",
+   "produtos": [
+    "P1",
+    "P2"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-240",
+   "codigo": "240",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-237",
+   "codigo": "237",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1",
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-295",
+   "codigo": "295",
+   "nome": "",
+   "status": "Inativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-122",
+   "codigo": "122",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-290",
+   "codigo": "290",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-164",
+   "codigo": "164",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-160",
+   "codigo": "160",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-235",
+   "codigo": "235",
+   "nome": "",
+   "status": "Inativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-6",
+   "codigo": "6",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1",
+    "P2"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-125",
+   "codigo": "125",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-318",
+   "codigo": "318",
+   "nome": "",
+   "status": "Inativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-297",
+   "codigo": "297",
+   "nome": "",
+   "status": "Inativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-2",
+   "codigo": "2",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-239",
+   "codigo": "239",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-51",
+   "codigo": "51",
+   "nome": "",
+   "status": "Inativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-205",
+   "codigo": "205",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-173",
+   "codigo": "173",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-189",
+   "codigo": "189",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-855",
+   "codigo": "855",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-248",
+   "codigo": "248",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-85",
+   "codigo": "85",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-286",
+   "codigo": "286",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-231",
+   "codigo": "231",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-56",
+   "codigo": "56",
+   "nome": "",
+   "status": "Inativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-171",
+   "codigo": "171",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P2",
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-329",
+   "codigo": "329",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-72",
+   "codigo": "72",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-73",
+   "codigo": "73",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-52",
+   "codigo": "52",
+   "nome": "",
+   "status": "Inativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-267",
+   "codigo": "267",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-109",
+   "codigo": "109",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-165",
+   "codigo": "165",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-16",
+   "codigo": "16",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-281",
+   "codigo": "281",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-272",
+   "codigo": "272",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-253",
+   "codigo": "253",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-233",
+   "codigo": "233",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-180",
+   "codigo": "180",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-275",
+   "codigo": "275",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-330",
+   "codigo": "330",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-57",
+   "codigo": "57",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1",
+    "P2"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-112",
+   "codigo": "112",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-75",
+   "codigo": "75",
+   "nome": "",
+   "status": "Inativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-128",
+   "codigo": "128",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-157",
+   "codigo": "157",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1",
+    "P2"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-179",
+   "codigo": "179",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-104",
+   "codigo": "104",
+   "nome": "",
+   "status": "Inativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-144",
+   "codigo": "144",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-107",
+   "codigo": "107",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-979",
+   "codigo": "979",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-970",
+   "codigo": "970",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-972",
+   "codigo": "972",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-163",
+   "codigo": "163",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-232",
+   "codigo": "232",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-224",
+   "codigo": "224",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-511",
+   "codigo": "511",
+   "nome": "",
+   "status": "Inativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-63",
+   "codigo": "63",
+   "nome": "",
+   "status": "Inativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-339",
+   "codigo": "339",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-236",
+   "codigo": "236",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-284",
+   "codigo": "284",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-172",
+   "codigo": "172",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-155",
+   "codigo": "155",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-857",
+   "codigo": "857",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-193",
+   "codigo": "193",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-137",
+   "codigo": "137",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-257",
+   "codigo": "257",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-223",
+   "codigo": "223",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-200",
+   "codigo": "200",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1",
+    "P2"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-49",
+   "codigo": "49",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1",
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-252",
+   "codigo": "252",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-241",
+   "codigo": "241",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-93",
+   "codigo": "93",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-65",
+   "codigo": "65",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-293",
+   "codigo": "293",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-296",
+   "codigo": "296",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-19",
+   "codigo": "19",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-166",
+   "codigo": "166",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-62",
+   "codigo": "62",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-254",
+   "codigo": "254",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-226",
+   "codigo": "226",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-126",
+   "codigo": "126",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-279",
+   "codigo": "279",
+   "nome": "",
+   "status": "Inativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-77",
+   "codigo": "77",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-244",
+   "codigo": "244",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-54",
+   "codigo": "54",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-23",
+   "codigo": "23",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-238",
+   "codigo": "238",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-177",
+   "codigo": "177",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-208",
+   "codigo": "208",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-217",
+   "codigo": "217",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-305",
+   "codigo": "305",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-315",
+   "codigo": "315",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1",
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-92",
+   "codigo": "92",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-247",
+   "codigo": "247",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-139",
+   "codigo": "139",
+   "nome": "",
+   "status": "Inativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-140",
+   "codigo": "140",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-58",
+   "codigo": "58",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-637",
+   "codigo": "637",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-17",
+   "codigo": "17",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-152",
+   "codigo": "152",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1",
+    "P2",
+    "P3",
+    "P4"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-274",
+   "codigo": "274",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-30",
+   "codigo": "30",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-156",
+   "codigo": "156",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-283",
+   "codigo": "283",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-249",
+   "codigo": "249",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-994",
+   "codigo": "994",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-145",
+   "codigo": "145",
+   "nome": "",
+   "status": "Inativo",
+   "produtos": [
+    "P1",
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-256",
+   "codigo": "256",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-202",
+   "codigo": "202",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-99",
+   "codigo": "99",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-234",
+   "codigo": "234",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-190",
+   "codigo": "190",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-312",
+   "codigo": "312",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-21",
+   "codigo": "21",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-14",
+   "codigo": "14",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-82",
+   "codigo": "82",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-289",
+   "codigo": "289",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-311",
+   "codigo": "311",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-271",
+   "codigo": "271",
+   "nome": "",
+   "status": "Inativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-531",
+   "codigo": "531",
+   "nome": "",
+   "status": "Inativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-324",
+   "codigo": "324",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-50",
+   "codigo": "50",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-282",
+   "codigo": "282",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-203",
+   "codigo": "203",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1",
+    "P3"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
+  },
+  {
+   "id": "c-80",
+   "codigo": "80",
+   "nome": "",
+   "status": "Ativo",
+   "produtos": [
+    "P1"
+   ],
+   "obs": "",
+   "treinamento": "Não",
+   "dtTreinamento": ""
   }
  ]
 }
