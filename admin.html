@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>IRIS · Implantação de fornecedores</title>
+<title>IRIS · Admin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -194,44 +194,75 @@ details.cofre .dentro{padding:18px;max-width:560px}
 
 <header class="topo">
   <div class="env">
-    <div class="marca"><em></em>IRIS <span>Implantação de fornecedores</span></div>
+    <div class="marca"><em></em>IRIS <span>Admin</span></div>
     <div class="topo-dir">
       <span class="fonte" id="selo-fonte"></span>
-      <a class="lnk on" href="#" aria-current="page">Consulta</a>
-      <a class="lnk" href="admin.html">Admin</a>
+      <a class="lnk" href="index.html">Consulta</a>
+      <a class="lnk on" href="#" aria-current="page">Admin</a>
     </div>
   </div>
 </header>
 
 <main class="env">
-  <section class="resumo" id="resumo"></section>
+  <div id="estado"></div>
+
+  <div class="barra-adm">
+    <button class="bt forte" id="novo">+ Novo fornecedor</button>
+    <button class="bt" id="baixar">Baixar dados.json</button>
+    <button class="bt" id="csv">Baixar CSV</button>
+    <button class="bt" id="importar">Importar</button>
+    <input type="file" id="arquivo" accept=".json,application/json" hidden>
+    <button class="bt perigo" id="descartar" hidden>Descartar rascunho</button>
+  </div>
+
+  <details class="cofre">
+    <summary>Publicar direto no GitHub Pages</summary>
+    <div class="dentro">
+      <p class="dica">Grava o <code>dados.json</code> no repositório e o Pages republica em ~1 minuto —
+      é o que faz a Consulta atualizar para todo mundo. Use um token <em>fine-grained</em> com
+      <b>Contents: Read and write</b> apenas neste repositório. Ele fica só neste navegador.</p>
+      <div class="campo"><label for="gh-repo">Repositório (dono/nome)</label>
+        <input id="gh-repo" placeholder="wilgner/iris-implantacao" autocomplete="off"></div>
+      <div class="dupla">
+        <div class="campo"><label for="gh-caminho">Caminho do arquivo</label>
+          <input id="gh-caminho" value="dados.json" autocomplete="off"></div>
+        <div class="campo"><label for="gh-branch">Branch</label>
+          <input id="gh-branch" value="main" autocomplete="off"></div>
+      </div>
+      <div class="campo"><label for="gh-token">Token</label>
+        <input id="gh-token" type="password" placeholder="github_pat_…" autocomplete="off"></div>
+      <div class="barra-adm" style="padding-top:0">
+        <button class="bt forte" id="publicar">Publicar agora</button>
+        <button class="bt" id="salvar-cfg">Guardar configuração</button>
+      </div>
+      <div id="gh-msg"></div>
+    </div>
+  </details>
 
   <div class="filtros">
     <div class="busca">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.3-4.3"/></svg>
-      <input id="busca" type="search" placeholder="Buscar fornecedor…" autocomplete="off">
+      <input id="busca" type="search" placeholder="Buscar para editar…" autocomplete="off">
     </div>
     <div class="chips" id="chips"></div>
   </div>
 
   <div class="grade" id="grade"></div>
-
-  <div class="rodape">
-    <span id="contagem"></span>
-    <span id="atualizado"></span>
-  </div>
+  <div class="rodape"><span id="contagem"></span><span id="atualizado"></span></div>
 </main>
 
 <div class="veu" id="veu"></div>
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-nome">
   <div class="modal-topo">
-    <div>
-      <div id="m-sit"></div>
-      <h2 id="m-nome"></h2>
-    </div>
+    <div><div id="m-sit"></div><h2 id="m-nome">Novo fornecedor</h2></div>
     <button class="fechar" id="fechar" aria-label="Fechar">&#10005;</button>
   </div>
   <div class="modal-corpo" id="m-corpo"></div>
+  <div class="modal-pe">
+    <button class="bt perigo" id="excluir">Excluir</button>
+    <button class="bt" id="cancelar">Cancelar</button>
+    <button class="bt forte" id="salvar">Salvar</button>
+  </div>
 </div>
 
 <script>/* ===== NÚCLEO IRIS — lógica compartilhada entre View e Admin ===== */
@@ -390,8 +421,9 @@ function passosHTML(f){
 </script>
 <script>
 const SEMENTE = {"atualizadoEm":"2026-07-28","origem":"planilha_implantacao_fornecedores_IRIS.xlsx","fornecedores":[{"id":"3-g-remocoes-comercio-e-servicos","nome":"3 G REMOÇOES COMERCIO E SERVIÇOS","status":"Treinado","dtTreinamento":"2026-01-21","app":"Não","uso":"Não","motivo":"Em Instalação","temSistema":"Não","celular":"Sim"},{"id":"a-g-servicos-medicos-ltda","nome":"A & G Serviços Médicos LTDA","status":"Pendente"},{"id":"a-emergencias-medicas-eireli","nome":"A + Emergências Médicas EIRELI","status":"Pendente"},{"id":"a-delgado-solucoes-ltda","nome":"A. Delgado Soluções LTDA","status":"Pendente"},{"id":"ac-transporte-de-pacientes-ltda","nome":"AC Transporte de Pacientes LTDA","status":"Treinado","dtAgendamento":"2026-04-17","dtTreinamento":"2026-04-17","app":"Não","uso":"Não","motivo":"Em Instalação","temSistema":"Não","celular":"Sim"},{"id":"acura-solucoes-em-saude","nome":"Acura - Soluções em Saúde","status":"Treinado","dtAgendamento":"2025-09-08","dtTreinamento":"2025-09-08","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"alicia-remocoes","nome":"Alicia Remoções","status":"Treinado","dtAgendamento":"2026-04-16","dtTreinamento":"2026-04-16","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"amazon-resgate","nome":"AMAZON RESGATE","status":"Treinado","dtAgendamento":"2026-04-23","dtTreinamento":"2026-04-23","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim","frota":9,"gps":"Sim"},{"id":"ambulancia-saude-vj-mendes","nome":"Ambulância Saúde - VJ MENDES","status":"Treinado","dtAgendamento":"2026-06-03","dtTreinamento":"2026-06-03","app":"Não","uso":"Não","motivo":"Em Instalação","temSistema":"Não","celular":"Sim","frota":13,"gps":"Sim"},{"id":"amc-advanced-medical-care-servicos-em-saude-ltda","nome":"AMC - Advanced Medical Care Serviços em Saúde LTDA","status":"Pendente"},{"id":"ame-emergencias-medicas-ltda","nome":"AME EMERGENCIAS MEDICAS LTDA","status":"Pendente"},{"id":"america-remocoes","nome":"America Remoçoes","status":"Treinado","dtAgendamento":"2025-10-22","dtTreinamento":"2025-10-22","app":"Não","uso":"Não","motivo":"Sem Dispositivo","temSistema":"Não","celular":"Não"},{"id":"amo-vida","nome":"Amo Vida","status":"Treinado","dtAgendamento":"2025-11-12","dtTreinamento":"2025-11-12","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"anilmed","nome":"Anilmed","status":"Treinado","dtAgendamento":"2025-09-24","dtTreinamento":"2025-09-24","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"anjos-da-guarda","nome":"Anjos da Guarda","status":"Treinado","dtAgendamento":"2026-04-02","dtTreinamento":"2026-04-02","app":"Sim","uso":"Não","temSistema":"Não","celular":"Sim"},{"id":"arcanjos-life","nome":"Arcanjos Life","status":"Treinado","dtAgendamento":"2026-04-02","dtTreinamento":"2026-04-02","app":"Sim","uso":"Sim","temSistema":"Sim","celular":"Sim"},{"id":"ativa-servicos-em-saude-ltda","nome":"Ativa Serviços em Saúde LTDA","status":"Pendente"},{"id":"beauty-life-servicos-medicos-e-life-remocoes","nome":"Beauty Life Serviços Médicos e Life Remoções","status":"Pendente"},{"id":"bem-estar-remocoes","nome":"Bem Estar Remoções","status":"Treinado","dtAgendamento":"2025-09-16","dtTreinamento":"2025-09-16","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"bem-me-care","nome":"Bem me Care","status":"Agendado","dtAgendamento":"2026-06-03"},{"id":"blue-angels-emergencias-ltda","nome":"Blue Angels Emergências LTDA","status":"Treinado","dtAgendamento":"2026-05-13","dtTreinamento":"2026-05-13","app":"Não","uso":"WEB","motivo":"Sem Dispositivo","temSistema":"Sim","qualSistema":"Próprio","celular":"somente pessoais","frota":4,"gps":"Não"},{"id":"c-a-p-servicos-medicos","nome":"C.A. P Serviços Médicos","status":"Pendente"},{"id":"ca-vittalis-remocao-homecare-ltda","nome":"CA Vittalis Remoção Homecare LTDA","status":"Pendente"},{"id":"caio-akira-yasui","nome":"CAIO AKIRA YASUI","status":"Pendente"},{"id":"cardiocenter-especialidades-medicas-ltda","nome":"Cardiocenter Especialidades Médicas LTDA","status":"Treinado","dtAgendamento":"2025-09-16","dtTreinamento":"2025-09-16","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"cemac-centro-especialidades","nome":"CEMAC - Centro Especialidades","status":"Treinado","dtAgendamento":"2025-09-06","dtTreinamento":"2025-09-06","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"cenemed-remocao","nome":"Cenemed Remoção","status":"Treinado","app":"Não","uso":"Não","temSistema":"Sim","qualSistema":"IRIS","celular":"Sim","gps":"Sim"},{"id":"clinerp-clinica-de-video-endosc-e-reprod-humana-","nome":"Clinerp Clínica de Vídeo Endosc e Reprod Humana LTDA","status":"Treinado","dtAgendamento":"2026-04-27","dtTreinamento":"2026-04-27","app":"Não","uso":"Não","motivo":"Sem Dispositivo","temSistema":"Não","celular":"Não","frota":5,"gps":"Sim","empresaGps":"Rota Exata"},{"id":"clinica-sao-camilo-ltda","nome":"Clínica São Camilo LTDA","status":"Pendente"},{"id":"constat-consultoria-e-auditoria-medico-hospitala","nome":"Constat - Consultoria e Auditoria Médico Hospitalar e Atendimento Domiciliar LTDA","status":"Pendente"},{"id":"cooperativa-de-trabalho-de-atendimento-pre-e-hos","nome":"Cooperativa de Trabalho de Atendimento Pré e Hospitalar LTDA - COAPH","status":"Pendente"},{"id":"copacare-serra-colonial","nome":"Copacare - SERRA COLONIAL","status":"Treinado","dtAgendamento":"2026-02-09","dtTreinamento":"2026-02-09","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"costa-e-costa-servicos","nome":"Costa e Costa serviços","status":"Pendente"},{"id":"cotreu-servicos-medicos-e-diagnostico-ltda","nome":"Cotreu Serviços Médicos e Diagnostico LTDA","status":"Pendente"},{"id":"cuiaba-vita-home-care-ltda","nome":"Cuiabá Vita Home Care LTDA","status":"Treinado","dtAgendamento":"2026-05-13","dtTreinamento":"2026-05-13","app":"Não","uso":"Não","temSistema":"Sim","qualSistema":"IRIS","celular":"Sim","frota":26,"gps":"Sim"},{"id":"cuidar-e-saude-apoio-e-gestao-eireli","nome":"Cuidar e Saúde Apoio e Gestão EIRELI","status":"Pendente"},{"id":"cuide-bem-saude-emergencias-medicas-ltda","nome":"CUIDE BEM SAÚDE EMERGÊNCIAS MÉDICAS LTDA","status":"Pendente"},{"id":"dirlen-da-silva-massa-massa-cia-ltda","nome":"DIRLEN DA SILVA MASSA MASSA & CIA LTDA","status":"Pendente"},{"id":"dlr-remocoes-medicas","nome":"DLR Remoções Médicas","status":"Pendente"},{"id":"dn-health-care-servicos-medicos-ltda","nome":"DN Health Care Serviços Médicos LTDA","status":"Pendente"},{"id":"dpr-servicos-de-saude-ltda","nome":"DPR Serviços de Saúde LTDA","status":"Pendente"},{"id":"dr-home-mais-home-lab","nome":"Dr Home - MAIS HOME LAB","status":"Treinado","dtAgendamento":"2026-04-06","dtTreinamento":"2026-04-06","app":"Não","uso":"Não","motivo":"Usa Outro Sistema","temSistema":"Sim","qualSistema":"Ubr","celular":"Sim","frota":18,"gps":"Sim"},{"id":"ederson-wilmer-garcia","nome":"Ederson Wilmer Garcia","status":"Pendente"},{"id":"emergencia-01","nome":"EMERGENCIA 01","status":"Treinado","dtAgendamento":"2026-05-25","dtTreinamento":"2026-05-25","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim","frota":4,"gps":"Sim"},{"id":"ennio-teixeira-marques-epp","nome":"Ennio Teixeira Marques - EPP","status":"Pendente"},{"id":"express-remocoes-ltda","nome":"EXPRESS REMOÇÕES LTDA","status":"Pendente"},{"id":"f1","nome":"F1","status":"Treinado","dtAgendamento":"2026-04-16","dtTreinamento":"2026-04-16","app":"Sim","uso":"Sim","temSistema":"Sim","celular":"Sim"},{"id":"fenix-uti-movel-ltda","nome":"Fenix UTI Móvel LTDA","status":"Pendente"},{"id":"fragamed-emergencias-medicas-ltda","nome":"Fragamed Emergências Médicas LTDA","status":"Pendente"},{"id":"gama-remocoes","nome":"GAMA REMOÇÕES","status":"Treinado","dtAgendamento":"2026-04-16","dtTreinamento":"2026-04-16","app":"Não","uso":"Não","motivo":"Em Instalação"},{"id":"getap-med","nome":"Getap Med","status":"Treinado","dtAgendamento":"2025-09-22","dtTreinamento":"2025-09-22","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"giro-med-remocoes-em-uti-movel-ltda","nome":"Giro Med Remoções em UTI Móvel LTDA","status":"Treinado","dtAgendamento":"2026-04-27","dtTreinamento":"2026-04-27","app":"Não","uso":"Não","motivo":"Em Instalação","temSistema":"Não","celular":"Sim","frota":2,"gps":"Não"},{"id":"global-emergencias-medicas-ltda","nome":"GLOBAL EMERGENCIAS MEDICAS LTDA","status":"Pendente"},{"id":"globovida-emergencias-medicas-ltda","nome":"Globovida Emergências Médicas LTDA","status":"Treinado","dtAgendamento":"2026-04-27","dtTreinamento":"2026-04-27","app":"Não","uso":"Não","motivo":"Sem Dispositivo","temSistema":"Não","celular":"Não","frota":15,"gps":"Sim"},{"id":"gr-remocoes","nome":"GR REMOÇÕES","status":"Treinado","dtAgendamento":"2026-04-02","dtTreinamento":"2026-04-02","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim","frota":4,"gps":"Sim"},{"id":"h-med","nome":"H MED","status":"Treinado","dtAgendamento":"2025-09-23","dtTreinamento":"2025-09-23","app":"Não","uso":"Não","motivo":"Usa Outro Sistema","temSistema":"Não","qualSistema":"IRIS","celular":"Sim"},{"id":"help-medic-d-m-g","nome":"Help Medic - D.M.G","status":"Treinado","dtAgendamento":"2025-11-20","dtTreinamento":"2025-11-20","app":"Não","uso":"Não","motivo":"iOS Incompatível","temSistema":"Não","celular":"Não","gps":"Sim"},{"id":"hh-saude-ltda","nome":"HH SAÚDE LTDA","status":"Pendente"},{"id":"hospital-imaculada-conceicao","nome":"Hospital Imaculada Conceição","status":"Treinado","dtAgendamento":"2026-05-25","dtTreinamento":"2026-05-25","app":"Não","uso":"Não","motivo":"Sem Dispositivo","temSistema":"Não","celular":"somente pessoais","frota":4,"gps":"Sim"},{"id":"hospital-unimed-pronto-atendimento-pocos","nome":"Hospital Unimed - Pronto Atendimento POÇOS","status":"Treinado","dtAgendamento":"2025-09-26","dtTreinamento":"2025-09-26","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim","gps":"Sim","empresaGps":"Sys4web"},{"id":"hospitalar-enfermagem-domiciliar-ltda","nome":"HOSPITALAR ENFERMAGEM DOMICILIAR LTDA","status":"Pendente"},{"id":"ideal-emergencias-medicas","nome":"IDEAL EMERGENCIAS MEDICAS","status":"Pendente"},{"id":"inovar","nome":"Inovar","status":"Treinado","dtAgendamento":"2025-11-20","dtTreinamento":"2025-11-20","app":"Não","uso":"Não","motivo":"iOS Incompatível","temSistema":"Não","celular":"Não","gps":"Sim"},{"id":"integral-care-ltda","nome":"Integral Care LTDA","status":"Pendente"},{"id":"intensimed-home-care-transporte-e-locacao-ltda","nome":"Intensimed Home Care Transporte e Locação LTDA","status":"Pendente"},{"id":"intensiva","nome":"Intensiva","status":"Treinado","app":"Não","uso":"Não","temSistema":"Sim","qualSistema":"IRIS","celular":"Sim"},{"id":"intermedilar-emergencias-medicas-ltda","nome":"Intermedilar Emergências Médicas LTDA","status":"Pendente"},{"id":"intervida-servicos-de-ambulancia-ltda","nome":"Intervida Serviços de Ambulância LTDA","status":"Pendente"},{"id":"ipsem-instituto-de-pesquisa-e-servicos-medicos-l","nome":"IPSEM Instituto de Pesquisa e Serviços Médicos LTDA","status":"Pendente"},{"id":"j-j-v-de-almeida-servicos-medicos-eireli","nome":"J J V de Almeida Serviços Médicos EIRELI","status":"Pendente"},{"id":"jf-med-ltda","nome":"JF MED LTDA","status":"Treinado","dtAgendamento":"2026-04-07","dtTreinamento":"2026-04-07","app":"Não","uso":"Não","motivo":"Usa Outro Sistema","temSistema":"Sim","qualSistema":"Próprio","celular":"Sim","frota":12,"gps":"Sim"},{"id":"jlc-efraim-remocoes-ltda","nome":"JLC Efraim - Remoções LTDA","status":"Pendente"},{"id":"jm2-servicos-de-emergencias-medicas-ltda-vip-sau","nome":"JM2 Serviços de Emergências Médicas LTDA - Vip Saúde","status":"Pendente"},{"id":"l-m-ambulancia-ltda","nome":"L & M Ambulância Ltda","status":"Treinado","dtAgendamento":"2026-05-12","dtTreinamento":"2026-05-12","app":"Não","uso":"WEB","motivo":"Sem Dispositivo","temSistema":"Não","celular":"somente pessoais","frota":1,"gps":"Não"},{"id":"l-evaristo-dos-santos-ltda","nome":"L.Evaristo dos Santos LTDA","status":"Pendente"},{"id":"laerte-ramos-de-carvalho-moreira-life-med","nome":"Laerte Ramos de Carvalho Moreira -LIFE MED","status":"Pendente"},{"id":"las-vida-remocoes-ltda","nome":"Las Vida Remoções LTDA","status":"Pendente"},{"id":"le-france","nome":"Le France","status":"Treinado","dtAgendamento":"2025-09-30","dtTreinamento":"2025-09-30","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"leste-de-minas-servicos-de-remocao-ltda","nome":"Leste de Minas Serviços de Remoção LTDA","status":"Pendente"},{"id":"leve-saude","nome":"Leve Saúde","status":"Treinado","app":"Não","uso":"Não","motivo":"Recusa/Objeção","temSistema":"Não","celular":"Não","gps":"Sim"},{"id":"life-care-medicina-ltda","nome":"Life Care Medicina LTDA","status":"Treinado","dtAgendamento":"2026-04-27","dtTreinamento":"2026-04-27","app":"Não","uso":"Não","motivo":"Em Instalação","temSistema":"Não","celular":"Sim","frota":3,"gps":"Não"},{"id":"life-care-p-de-s-de-saude-vida-remocoes","nome":"LIFE CARE P DE S. DE SAÚDE - VIDA REMOÇÕES","status":"Pendente"},{"id":"life-corp-do-brasil-emergencias-medicas-ltda","nome":"Life Corp do Brasil Emergências Médicas LTDA","status":"Treinado","dtAgendamento":"2026-05-13","dtTreinamento":"2026-05-13","app":"Não","uso":"Não","motivo":"Sem Dispositivo","temSistema":"Não","celular":"somente pessoais","frota":12,"gps":"Sim"},{"id":"life-remocenter","nome":"Life Remocenter","status":"Treinado","dtAgendamento":"2026-04-17","dtTreinamento":"2026-04-17","app":"Sim","uso":"Sim","temSistema":"Sim","qualSistema":"Próprio","celular":"Sim","frota":14,"gps":"Sim"},{"id":"llm-servicos-medicos-de-transporte-ltda","nome":"LLM Serviços Médicos de Transporte LTDA","status":"Pendente"},{"id":"m-r-emergencias-medicas-ltda","nome":"M&R Emergências Médicas LTDA","status":"Treinado","dtAgendamento":"2026-04-17","dtTreinamento":"2026-04-17","app":"Não","uso":"Não","motivo":"Em Instalação","temSistema":"Não","celular":"Sim"},{"id":"m-p-p-clinica-medica-e-servicos-de-remocao-socie","nome":"M. P. P. Clínica Médica e Serviços de Remoção Sociedade Limitada","status":"Pendente"},{"id":"mais-saude-atendimento-domiciliar-ltda","nome":"Mais Saúde Atendimento Domiciliar LTDA","status":"Pendente"},{"id":"med-servicos-de-ambulancia-ltda","nome":"Med Serviços de Ambulância LTDA","status":"Pendente"},{"id":"medcall-juiz-de-fora","nome":"Medcall Juiz de fora","status":"Treinado","dtAgendamento":"2025-10-16","dtTreinamento":"2025-10-16","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"medical-save","nome":"Medical Save","status":"Pendente"},{"id":"medical-save-locacao-de-ambulancias-ltda","nome":"Medical Save Locação de Ambulâncias LTDA","status":"Pendente"},{"id":"medicall-prestacao-de-servicos","nome":"Medicall Prestação de Serviços","status":"Treinado","app":"Sim","uso":"Não","motivo":"Inativo","celular":"Sim"},{"id":"medicar-emergencias-medicas-sao-paulo-ltda","nome":"Medicar Emergências Médicas São Paulo LTDA","status":"Pendente"},{"id":"medicare-servicos-ltda","nome":"Medicare Serviços LTDA","status":"Treinado","dtAgendamento":"2026-04-23","dtTreinamento":"2026-04-23","app":"Não","uso":"Não","motivo":"Usa Outro Sistema","temSistema":"Sim","qualSistema":"IRIS","celular":"Sim","frota":5,"gps":"Sim","empresaGps":"Public"},{"id":"medshore-servicos-em-saude-e-seguranca-ltda","nome":"Medshore Serviços em Saúde e Segurança LTDA","status":"Pendente"},{"id":"medsul","nome":"Medsul","status":"Treinado","dtAgendamento":"2025-09-10","dtTreinamento":"2025-09-10","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"medvida-emergencias-medicas-ltda","nome":"Medvida Emergências Médicas LTDA","status":"Treinado","dtAgendamento":"2026-05-05","dtTreinamento":"2026-05-05","app":"Não","uso":"Não","motivo":"Não Quis","temSistema":"Sim","qualSistema":"Próprio","celular":"Não","frota":4,"gps":"Sim"},{"id":"medvidas-servicos","nome":"Medvidas Serviços","status":"Treinado","app":"Não","uso":"Não","motivo":"Usa Outro Sistema","temSistema":"Sim","qualSistema":"TCI","celular":"Sim","gps":"Sim"},{"id":"moraes-servicos-em-saude-ltda","nome":"Moraes Serviços em Saúde LTDA","status":"Pendente"},{"id":"nucleo-medico-atende-noroeste-de-minas","nome":"Núcleo Médico - Atende Noroeste De Minas","status":"Treinado","dtAgendamento":"2026-04-09","dtTreinamento":"2026-04-09","app":"Não","uso":"Não","motivo":"Usa Outro Sistema","temSistema":"Sim","qualSistema":"IRIS","celular":"Sim","frota":12,"gps":"Sim"},{"id":"oeste-vida-ltda","nome":"OESTE VIDA LTDA","status":"Pendente"},{"id":"otto-e-rocha-servicos-medicos-hospitalares-ltda","nome":"OTTO E ROCHA SERVICOS MEDICOS HOSPITALARES LTDA","status":"Pendente"},{"id":"paramed-servicos-medicos-ltda-epp","nome":"Paramed Serviços Médicos LTDA EPP","status":"Pendente"},{"id":"patricio-araujo-da-silva-me","nome":"PATRÍCIO ARAÚJO DA SILVA ME","status":"Pendente"},{"id":"phoenix-servicos-medicos-ltda","nome":"Phoenix Serviços Médicos LTDA","status":"Treinado","dtAgendamento":"2026-04-10","dtTreinamento":"2026-04-10","app":"Não","uso":"Não","motivo":"Usa Outro Sistema","temSistema":"Sim","qualSistema":"IRIS","celular":"Sim","frota":20,"gps":"Sim"},{"id":"pleno-hospital","nome":"PLENO HOSPITAL","status":"Treinado","dtAgendamento":"2026-04-13","dtTreinamento":"2026-04-13","app":"Não","uso":"Não","motivo":"Em Instalação","temSistema":"Sim","celular":"Sim"},{"id":"pontual-g7","nome":"Pontual G7","status":"Treinado","dtAgendamento":"2025-09-17","dtTreinamento":"2025-09-17","app":"Não","uso":"Não","motivo":"Sem Dispositivo","temSistema":"Não","celular":"Não"},{"id":"promed-santa-angela","nome":"Promed Santa Ângela","status":"Treinado","app":"Não","uso":"Não","motivo":"Usa Outro Sistema","temSistema":"Sim","qualSistema":"TCI","celular":"Sim","gps":"Sim"},{"id":"pulsar","nome":"PULSAR","status":"Treinado","dtAgendamento":"2026-04-06","dtTreinamento":"2026-04-06","app":"Não","uso":"WEB","motivo":"Sem Dispositivo","celular":"Sim"},{"id":"r-l-do-nascimento-segundo","nome":"R L do Nascimento Segundo","status":"Pendente"},{"id":"r-r-servicos-hospitalares","nome":"R R SERVIÇOS HOSPITALARES","status":"Treinado","dtAgendamento":"2026-01-21","dtTreinamento":"2026-01-21","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"r-e-remocao-de-emergencia-ltda","nome":"R&E Remoção de Emergência LTDA","status":"Pendente"},{"id":"remocoes-monlevade","nome":"Remoções Monlevade","status":"Treinado","dtAgendamento":"2026-04-13","dtTreinamento":"2026-04-13","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"remocoes-resende","nome":"Remoções Resende","status":"Treinado","dtAgendamento":"2026-04-10","dtTreinamento":"2026-04-10","app":"Sim","uso":"Sim","celular":"Sim"},{"id":"removida-emergencias-medicas-sgs","nome":"Removida Emergencias Medicas -SGS","status":"Pendente"},{"id":"rio-verde-resgate-servicos-medicos-e-remocao-rvr","nome":"Rio Verde Resgate Serviços Médicos e Remoção - RVR LTDA","status":"Treinado","dtAgendamento":"2026-05-06","dtTreinamento":"2026-05-06","app":"Não","uso":"Não","motivo":"iOS Incompatível","temSistema":"Sim","qualSistema":"TCI","celular":"Não","frota":9,"gps":"Sim"},{"id":"rn-resgate-servicos-e-comercio-ltda","nome":"RN Resgate Serviços e Comércio LTDA","status":"Pendente"},{"id":"salva-vida-s-o-s-emergencias-medicas-ltda","nome":"Salva-Vida S.O.S. - Emergências Médicas LTDA","status":"Pendente"},{"id":"same-solucoes-medicas-ltda","nome":"SAME Soluções Médicas LTDA","status":"Pendente"},{"id":"saude-e-vida-remocoes-de-pacientes-ltda","nome":"Saúde e Vida Remoções de Pacientes LTDA","status":"Pendente"},{"id":"saude-movel-remocoes-ltda","nome":"Saúde Móvel Remoções LTDA","status":"Pendente"},{"id":"serra-assistence-ltda","nome":"Serra Assistence LTDA","status":"Treinado","dtAgendamento":"2026-04-04","dtTreinamento":"2026-04-04","app":"Não","uso":"Não","motivo":"Usa Outro Sistema","temSistema":"Sim","qualSistema":"Próprio","celular":"Não","frota":6,"gps":"Sim"},{"id":"servicos-medicos-de-atendimento-a-emergencia-e-r","nome":"SERVIÇOS MÉDICOS DE ATENDIMENTO A EMERGÊNCIA E REMOÇÕES LTDA","status":"Pendente"},{"id":"seu","nome":"SEU","status":"Treinado","app":"Não","uso":"Não","motivo":"Sem Dispositivo","temSistema":"Não","celular":"Não"},{"id":"sobreaviso-remocoes-ltda","nome":"SOBREAVISO REMOCOES LTDA","status":"Pendente"},{"id":"sos-lar-atendimento-medico-e-remocoes-ltda","nome":"SOS Lar Atendimento Médico e Remoções LTDA","status":"Treinado","dtAgendamento":"2026-04-23","dtTreinamento":"2026-04-23","app":"Não","uso":"Não","motivo":"Em Instalação","temSistema":"Sim","qualSistema":"Próprio","celular":"Sim","frota":12,"gps":"Sim"},{"id":"sos-remocoes-ltda","nome":"SOS Remoções LTDA","status":"Pendente"},{"id":"sos-ubervidas","nome":"SOS UBERVIDAS","status":"Treinado","dtAgendamento":"2026-04-10","dtTreinamento":"2026-04-10","app":"Não","uso":"Não","motivo":"Sem Dispositivo","temSistema":"Não","celular":"Não"},{"id":"sp-vidas-emergencias-medicas-ltda","nome":"SP Vidas Emergências Médicas LTDA","status":"Treinado","dtAgendamento":"2026-05-25","dtTreinamento":"2026-05-25","app":"Não","uso":"Sim","temSistema":"Sim","qualSistema":"TCI","celular":"Sim","frota":12,"gps":"Sim"},{"id":"staff-servicos-medicos-ltda","nome":"Staff Serviços Médicos LTDA","status":"Treinado","dtAgendamento":"2026-05-08","dtTreinamento":"2026-05-08","app":"Não","uso":"Não","temSistema":"Sim","qualSistema":"Próprio","celular":"Sim","frota":6,"gps":"Sim"},{"id":"tbt-servicos-medicos-ltda","nome":"TBT Serviços Médicos LTDA","status":"Pendente"},{"id":"terapia-do-movimento","nome":"Terapia do Movimento","status":"Pendente"},{"id":"torre-emergencias-medicas-ltda","nome":"Torre Emergências Médicas LTDA","status":"Treinado","dtAgendamento":"2026-05-04","dtTreinamento":"2026-05-04","app":"Não","uso":"Não"},{"id":"trans-medi","nome":"Trans Medi","status":"Treinado","dtAgendamento":"2025-09-19","dtTreinamento":"2025-09-19","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"transcordis","nome":"Transcordis","status":"Treinado","dtAgendamento":"2026-01-12","dtTreinamento":"2026-01-12","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"translife-horus-home-care-remocao-uti-em-saude-l","nome":"Translife.horus - Home Care Remoção/UTI em Saúde LTDA","status":"Pendente"},{"id":"transvida-servico-em-saude","nome":"transvida serviço em saúde","status":"Treinado","dtAgendamento":"2026-01-25","dtTreinamento":"2026-01-25","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"udicor-gestao-em-saude","nome":"Udicor Gestão em Saúde","status":"Treinado","dtAgendamento":"2025-09-19","dtTreinamento":"2025-09-19","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"ultra-life-saude-ltda","nome":"Ultra Life Saúde LTDA","status":"Pendente"},{"id":"unimed-alfenas-cooperativa-de-trabalho-medico","nome":"Unimed Alfenas Cooperativa de Trabalho Médico","status":"Pendente"},{"id":"unimed-araxa-cooperativa-de-trabalho-medico-ltda","nome":"Unimed Araxá Cooperativa de Trabalho Médico LTDA","status":"Pendente"},{"id":"unimed-centro-oeste","nome":"Unimed Centro Oeste","status":"Treinado","dtAgendamento":"2024-12-15","dtTreinamento":"2024-12-15","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"unimed-centro-sul-fluminense-cooperativa-de-trab","nome":"Unimed Centro Sul Fluminense Cooperativa de Trabalho Médico","status":"Pendente"},{"id":"unimed-conselheiro-lafaiete-cooperativa-de-traba","nome":"Unimed Conselheiro Lafaiete Cooperativa de Trabalho Médico LTDA","status":"Pendente"},{"id":"unimed-curvelo-cooperativa-de-trabalho-medico-lt","nome":"Unimed Curvelo Cooperativa de Trabalho Médico LTDA","status":"Pendente"},{"id":"unimed-de-dracena-coop-de-trab-medico","nome":"Unimed de Dracena Coop. De Trab. Médico","status":"Pendente"},{"id":"unimed-de-mineiros-cooperativa-de-trabalho-medic","nome":"Unimed de Mineiros Cooperativa de Trabalho Médico","status":"Pendente"},{"id":"unimed-ilheus","nome":"Unimed Ilhéus","status":"Treinado","dtAgendamento":"2026-04-24","dtTreinamento":"2026-04-24","app":"Não","uso":"Não","motivo":"Em Instalação","temSistema":"Não","celular":"Sim","frota":3,"gps":"Sim"},{"id":"unimed-inconfidentes","nome":"Unimed Inconfidentes","status":"Treinado","dtAgendamento":"2025-10-18","dtTreinamento":"2025-10-18","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"unimed-itabira-cooperativa-de-trabalho-medico","nome":"Unimed Itabira Cooperativa de Trabalho Médico","status":"Pendente"},{"id":"unimed-itajuba-cooperativa-de-trabalho-medico","nome":"Unimed Itajubá Cooperativa de Trabalho Médico","status":"Pendente"},{"id":"unimed-ituiutaba-cooperativa-do-trabalho-medico-","nome":"Unimed Ituiutaba Cooperativa do Trabalho Médico LTDA","status":"Pendente"},{"id":"unimed-juiz-de-fora-cooperativa-de-trabalho-medi","nome":"Unimed Juiz de Fora Cooperativa de Trabalho Médico LTDA","status":"Pendente"},{"id":"unimed-santo-antonio-de-jesus-coo-de-trabalho-me","nome":"Unimed Santo Antônio de Jesus Coo. de Trabalho Médico","status":"Pendente"},{"id":"unimed-sao-sebastiao-do-paraiso-cooperativa-de-t","nome":"Unimed São Sebastião do Paraíso Cooperativa de Trabalho Médico LTDA","status":"Treinado","dtAgendamento":"2026-05-13","dtTreinamento":"2026-05-13","app":"Não","uso":"Não","motivo":"Em Instalação","temSistema":"Não","celular":"Sim","frota":1,"gps":"Sim"},{"id":"unimed-sudoeste-de-minas-cooperativa-de-trabalho","nome":"Unimed Sudoeste de Minas Cooperativa de Trabalho Médico","status":"Pendente"},{"id":"unimed-sul-mineira","nome":"Unimed Sul Mineira","status":"Treinado","dtAgendamento":"2025-09-17","dtTreinamento":"2025-09-17","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"unimed-teofilo-otoni-cooperativa-de-trabalho-med","nome":"Unimed Teófilo Otoni Cooperativa de Trabalho Médico","status":"Pendente"},{"id":"unimed-volta-redonda-cooperativa-de-trabalho-med","nome":"UNIMED VOLTA REDONDA COOPERATIVA DE TRABALHO MÉDICO LTDA","status":"Pendente"},{"id":"uvm-maringa-urgencias-e-emergencias-eireli","nome":"UVM Maringa Urgências e Emergências EIRELI","status":"Pendente"},{"id":"v-p-mendes-ambulancia-ltda","nome":"V P MENDES AMBULANCIA LTDA","status":"Pendente"},{"id":"vale-do-piranga-servicos-em-saude-ltda","nome":"Vale do Piranga Serviços em Saúde LTDA","status":"Pendente"},{"id":"valmed","nome":"Valmed","status":"Treinado","dtAgendamento":"2026-01-15","dtTreinamento":"2026-01-15","app":"Não","uso":"Não","motivo":"Usa Outro Sistema","temSistema":"Sim","qualSistema":"Ezra","celular":"Sim"},{"id":"vidas-emergencias-medicas-uti-movel-ltda","nome":"VIDAS EMERGÊNCIAS MÉDICAS /UTI MÓVEL LTDA","status":"Treinado","dtAgendamento":"2026-04-23","dtTreinamento":"2026-04-23","app":"Não","uso":"Não","motivo":"Em Instalação","temSistema":"Sim","qualSistema":"Próprio","celular":"Sim","frota":5,"gps":"Sim"},{"id":"vidas-servicos-hospitalares-ltda","nome":"Vidas Serviços Hospitalares LTDA","status":"Pendente"},{"id":"vimedi-atividade-medica-movel-ltda","nome":"Vimedi Atividade Médica Móvel LTDA","status":"Pendente"},{"id":"vital-mais","nome":"Vital Mais","status":"Treinado","dtAgendamento":"2026-04-22","dtTreinamento":"2026-04-22","app":"Não","uso":"Não","motivo":"Usa Outro Sistema","temSistema":"Sim","qualSistema":"IRIS","celular":"Sim","frota":14,"gps":"Sim"},{"id":"vitalle-remocoes-medicas","nome":"Vitalle Remoções Médicas","status":"Treinado","dtAgendamento":"2025-09-03","dtTreinamento":"2025-09-03","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"viver-mais-ltda","nome":"Viver Mais LTDA","status":"Pendente"},{"id":"voemed-servicos-medicos-ltda","nome":"Voemed Serviços Médicos LTDA","status":"Pendente"},{"id":"w-carvalho-uti-movel-ltda-me","nome":"W. Carvalho UTI Móvel LTDA ME","status":"Pendente"},{"id":"wmed","nome":"Wmed","status":"Pendente"},{"id":"zelar-remocoes-de-paciente","nome":"ZELAR REMOÇOES DE PACIENTE","status":"Treinado","dtAgendamento":"2025-09-12","dtTreinamento":"2025-09-12","app":"Sim","uso":"Sim","temSistema":"Não","celular":"Sim"},{"id":"vida-plus","nome":"Vida Plus","status":"Treinado","dtAgendamento":"2026-05-12","dtTreinamento":"2026-05-12","app":"Não","uso":"WEB","motivo":"Sem Dispositivo","temSistema":"Não","celular":"somente pessoais","frota":9,"gps":"Sim"},{"id":"pronto-doctor-home-care","nome":"Pronto Doctor Home Care","status":"Treinado","dtAgendamento":"2026-05-22","dtTreinamento":"2026-05-22","app":"Não","uso":"WEB","motivo":"Sem Dispositivo","temSistema":"Não","celular":"somente pessoais","frota":3,"gps":"Sim"},{"id":"saude-vip","nome":"Saúde VIP","status":"Treinado","dtAgendamento":"2026-05-22","dtTreinamento":"2026-05-22","app":"Não","uso":"WEB","motivo":"Sem Dispositivo","temSistema":"Não","celular":"somente pessoais","frota":3,"gps":"Sim"},{"id":"ewg","nome":"EWG","status":"Pendente"}]};
+const K_RASCUNHO = 'iris_rascunho_v1', K_GH = 'iris_github_v1';
 
-let DOC = {fornecedores:[]}, filtro = 'todos', termo = '';
+let DOC = {fornecedores:[]}, sujo = false, editando = null, filtro = 'todos', termo = '';
 
 const FILTROS = [
   {k:'todos',  r:'Todos',            f:() => true},
@@ -404,34 +436,60 @@ const FILTROS = [
 
 (async function(){
   const r = await carregarDados();
-  DOC = r.doc;
+  const rascunho = lerRascunho();
+  if(rascunho){ DOC = rascunho; sujo = true; } else DOC = r.doc;
   DOC.fornecedores = DOC.fornecedores.map(normalizar);
   document.getElementById('selo-fonte').textContent = r.fonte === 'arquivo' ? '' : 'dados embutidos';
-  document.getElementById('atualizado').textContent = 'Atualizado em ' + (dataLonga(DOC.atualizadoEm) || '—');
 
-  pintarResumo(); pintarChips(); render();
+  lerCfg(); pintarChips(); render(); pintarEstado();
 
   document.getElementById('busca').addEventListener('input', e => { termo = chave(e.target.value); render(); });
-  document.getElementById('fechar').addEventListener('click', () => fechar());
-  document.getElementById('veu').addEventListener('click', () => fechar());
+  document.getElementById('novo').addEventListener('click', () => abrirForm(null));
+  document.getElementById('fechar').addEventListener('click', fechar);
+  document.getElementById('cancelar').addEventListener('click', fechar);
+  document.getElementById('veu').addEventListener('click', fechar);
+  document.getElementById('salvar').addEventListener('click', salvar);
+  document.getElementById('excluir').addEventListener('click', excluir);
+  document.getElementById('baixar').addEventListener('click', baixarJSON);
+  document.getElementById('csv').addEventListener('click', baixarCSV);
+  document.getElementById('importar').addEventListener('click', () => document.getElementById('arquivo').click());
+  document.getElementById('arquivo').addEventListener('change', importar);
+  document.getElementById('descartar').addEventListener('click', descartar);
+  document.getElementById('publicar').addEventListener('click', publicar);
+  document.getElementById('salvar-cfg').addEventListener('click', () => { gravarCfg(); msgGH('ok','Configuração guardada neste navegador.'); });
   document.addEventListener('keydown', e => { if(e.key === 'Escape') fechar(); });
-  window.addEventListener('hashchange', porHash);
-  porHash();
+  window.addEventListener('beforeunload', e => { if(sujo){ e.preventDefault(); e.returnValue = ''; } });
 })();
 
-/* ---------- resumo ---------- */
-function pintarResumo(){
-  const L = DOC.fornecedores, c = contarEtapas(L);
-  const blocos = [
-    {v:L.length, r:'fornecedores na base', cls:''},
-    {v:c[1],     r:'treinados',            cls:'lj'},
-    {v:c[2],     r:'com app instalado',    cls:'vd'},
-    {v:c[3],     r:'usando o IRIS',        cls:'vd'}
-  ];
-  document.getElementById('resumo').innerHTML = blocos.map(b =>
-    `<div class="kpi ${b.cls}"><div class="v">${b.v}</div><div class="r"><em></em>${b.r}</div></div>`).join('');
+/* ---------- rascunho ---------- */
+function lerRascunho(){
+  try{ const s = localStorage.getItem(K_RASCUNHO); return s ? JSON.parse(s) : null; }catch(e){ return null; }
+}
+function marcarSujo(){
+  sujo = true;
+  DOC.atualizadoEm = new Date().toISOString().slice(0,10);
+  try{ localStorage.setItem(K_RASCUNHO, JSON.stringify(DOC)); }
+  catch(e){ alert('Não deu para guardar o rascunho neste navegador. Baixe o dados.json antes de fechar a aba.'); }
+  pintarEstado();
+}
+function limparRascunho(){ sujo = false; localStorage.removeItem(K_RASCUNHO); pintarEstado(); }
+
+function pintarEstado(){
+  document.getElementById('descartar').hidden = !sujo;
+  document.getElementById('atualizado').textContent = 'Atualizado em ' + (dataLonga(DOC.atualizadoEm) || '—');
+  document.getElementById('estado').innerHTML = sujo
+    ? `<div class="aviso"><span>&#9679;</span><div><b>Rascunho local, ainda não publicado.</b>
+       As alterações estão salvas só neste navegador. Para a Consulta mostrar isso a todos,
+       publique no GitHub ou baixe o <code>dados.json</code> e substitua o arquivo do site.</div></div>`
+    : `<div class="aviso ok"><span>&#10003;</span><div><b>Base sincronizada.</b>
+       O que você vê aqui é o que a Consulta mostra.</div></div>`;
+}
+function descartar(){
+  if(!confirm('Descartar todas as alterações locais e voltar ao dados.json publicado?')) return;
+  localStorage.removeItem(K_RASCUNHO); location.reload();
 }
 
+/* ---------- cards ---------- */
 function pintarChips(){
   document.getElementById('chips').innerHTML = FILTROS.map(f =>
     `<button class="chip" data-k="${f.k}" aria-pressed="${f.k === filtro}">${f.r}<b>${DOC.fornecedores.filter(f.f).length}</b></button>`).join('');
@@ -442,83 +500,234 @@ function pintarChips(){
   }));
 }
 
-/* ---------- cards ---------- */
 function visiveis(){
   const teste = FILTROS.find(f => f.k === filtro).f;
   const peso = {uso:0, web:1, espera:2, bloq:3, agd:4, pend:5};
   return DOC.fornecedores
-    .filter(f => teste(f) && (!termo ||
-      chave([f.nome, f.status, f.motivo, f.qualSistema, f.empresaGps, f.obs].join(' ')).includes(termo)))
+    .filter(f => teste(f) && (!termo || chave([f.nome,f.status,f.motivo,f.qualSistema,f.obs].join(' ')).includes(termo)))
     .sort((a,b) => (peso[situacao(a).k] - peso[situacao(b).k]) || (chave(a.nome) > chave(b.nome) ? 1 : -1));
 }
 
 function render(){
   const itens = visiveis(), grade = document.getElementById('grade');
   grade.innerHTML = itens.length
-    ? itens.map(f => cardHTML(f)).join('')
-    : `<div class="nada"><b>Nenhum fornecedor aqui</b>Ajuste a busca ou troque o filtro.</div>`;
-  ligarCards(grade, id => { location.hash = 'f/' + id; });
-
-  const emUso = itens.filter(f => ['uso','web'].includes(situacao(f).k)).length;
-  const frota = itens.reduce((s,f) => s + (Number(f.frota) || 0), 0);
-  document.getElementById('contagem').textContent =
-    `${itens.length} de ${DOC.fornecedores.length} fornecedores · ${emUso} em uso · ${frota} veículos mapeados`;
+    ? itens.map(f => cardHTML(f, `<div class="acao"><button class="x" data-ex="${esc(f.id)}">Excluir</button></div>`)).join('')
+    : `<div class="nada"><b>Nada aqui</b>Ajuste a busca ou cadastre um fornecedor.</div>`;
+  ligarCards(grade, abrirForm);
+  grade.querySelectorAll('[data-ex]').forEach(b => b.addEventListener('click', () => {
+    const f = DOC.fornecedores.find(x => x.id === b.dataset.ex);
+    if(f && confirm(`Excluir "${f.nome}" da base?`)){
+      DOC.fornecedores = DOC.fornecedores.filter(x => x.id !== f.id);
+      marcarSujo(); pintarChips(); render();
+    }
+  }));
+  document.getElementById('contagem').textContent = `${itens.length} de ${DOC.fornecedores.length} fornecedores`;
 }
 
-/* ---------- modal ---------- */
-function porHash(){
-  const m = location.hash.match(/^#f\/(.+)$/);
-  if(!m) return fechar(true);
-  const f = DOC.fornecedores.find(x => x.id === decodeURIComponent(m[1]));
-  f ? abrir(f) : fechar(true);
+/* ---------- formulário no modal ---------- */
+function sel(rot, campo, ops, valor){
+  return `<div class="campo"><label for="c-${campo}">${rot}</label><select id="c-${campo}">` +
+    ops.map(o => `<option value="${esc(o)}"${o === valor ? ' selected' : ''}>${o === '' ? '—' : esc(o)}</option>`).join('') +
+    `</select></div>`;
+}
+function txt(rot, campo, valor, tipo){
+  return `<div class="campo"><label for="c-${campo}">${rot}</label>
+    <input id="c-${campo}" type="${tipo || 'text'}" value="${esc(valor)}"></div>`;
 }
 
-function abrir(f){
-  const dias = diasDesde(f.dtTreinamento);
-  document.getElementById('m-nome').textContent = f.nome;
-  document.getElementById('m-sit').innerHTML = sitHTML(f);
-
-  const par = (r,v,larga) => `<div class="par${larga ? ' larga' : ''}"><dt>${r}</dt><dd>${v || '<span class="vazio">—</span>'}</dd></div>`;
+function abrirForm(id){
+  const f = id ? DOC.fornecedores.find(x => x.id === id) : normalizar({});
+  if(id && !f) return;
+  editando = id || null;
+  document.getElementById('m-nome').textContent = id ? f.nome : 'Novo fornecedor';
+  document.getElementById('m-sit').innerHTML = id ? sitHTML(f) : '<span class="sit">Cadastro novo</span>';
+  document.getElementById('excluir').hidden = !id;
 
   document.getElementById('m-corpo').innerHTML = `
-    <div class="bloco"><span class="rot">Trilha de adoção</span>${passosHTML(f)}</div>
-    <div class="bloco"><span class="rot">Implantação</span><dl class="pares">
-      ${par('Status', esc(f.status))}
-      ${par('Motivo de não uso', esc(f.motivo))}
-      ${par('Agendamento', dataLonga(f.dtAgendamento))}
-      ${par('Treinamento', dataLonga(f.dtTreinamento))}
-      ${par('Mês de referência', mesAno(f.dtTreinamento))}
-      ${par('Dias desde o treino', dias !== null ? dias + ' dias' : '')}
-      ${par('Início de uso', dataLonga(f.dtInicioUso), true)}
-    </dl></div>
-    <div class="bloco"><span class="rot">Tecnologia</span><dl class="pares">
-      ${par('App instalado', esc(f.app))}
-      ${par('Utilizando', f.uso === 'WEB' ? 'Sim, pela web' : esc(f.uso))}
-      ${par('Tem sistema próprio', esc(f.temSistema))}
-      ${par('Qual sistema', esc(f.qualSistema))}
-      ${par('Celular Android/iOS', esc(f.celular), true)}
-    </dl></div>
-    <div class="bloco"><span class="rot">Frota e rastreamento</span><dl class="pares">
-      ${par('Veículos', f.frota !== '' ? esc(f.frota) : '')}
-      ${par('Rastreador GPS', esc(f.gps))}
-      ${par('Empresa do rastreador', esc(f.empresaGps), true)}
-    </dl></div>
-    <div class="bloco"><span class="rot">Contato e notas</span><dl class="pares">
-      ${par('Telefone', f.telefone ? `<a href="tel:${esc(f.telefone.replace(/\D/g,''))}">${esc(f.telefone)}</a>` : '', true)}
-      ${par('Observações', esc(f.obs).replace(/\n/g,'<br>'), true)}
-    </dl></div>`;
+    ${id ? `<div class="bloco"><span class="rot">Trilha de adoção</span>${passosHTML(f)}</div>` : ''}
+    <div class="bloco"><span class="rot">Identificação</span>
+      ${txt('Fornecedor *','nome',f.nome)}
+      ${sel('Status','status',OPCOES.status,f.status)}
+    </div>
+    <div class="bloco"><span class="rot">Implantação</span>
+      <div class="dupla">${txt('Agendamento','dtAgendamento',f.dtAgendamento,'date')}${txt('Treinamento','dtTreinamento',f.dtTreinamento,'date')}</div>
+      <div class="dupla">${sel('App instalado','app',OPCOES.app,f.app)}${sel('Utilizando','uso',OPCOES.uso,f.uso)}</div>
+      ${sel('Motivo de não utilização','motivo',OPCOES.motivo,f.motivo)}
+      ${txt('Data de início de uso','dtInicioUso',f.dtInicioUso,'date')}
+    </div>
+    <div class="bloco"><span class="rot">Tecnologia</span>
+      <div class="dupla">${sel('Tem sistema próprio','temSistema',OPCOES.simnao,f.temSistema)}${sel('Qual sistema','qualSistema',OPCOES.sistema.concat(f.qualSistema && !OPCOES.sistema.includes(f.qualSistema) ? [f.qualSistema] : []),f.qualSistema)}</div>
+      ${sel('Celular Android/iOS','celular',OPCOES.celular,f.celular)}
+    </div>
+    <div class="bloco"><span class="rot">Frota e rastreamento</span>
+      <div class="dupla">${txt('Veículos','frota',f.frota,'number')}${sel('Rastreador GPS','gps',OPCOES.simnao,f.gps)}</div>
+      ${txt('Empresa do rastreador','empresaGps',f.empresaGps)}
+    </div>
+    <div class="bloco"><span class="rot">Contato e notas</span>
+      ${txt('Telefone','telefone',f.telefone,'tel')}
+      <div class="campo"><label for="c-obs">Observações</label><textarea id="c-obs">${esc(f.obs)}</textarea></div>
+    </div>`;
 
   document.getElementById('modal').classList.add('on');
   document.getElementById('veu').classList.add('on');
   document.body.style.overflow = 'hidden';
-  document.getElementById('fechar').focus();
+  document.getElementById('c-nome').focus();
 }
 
-function fechar(silencioso){
+function salvar(){
+  const v = c => (document.getElementById('c-' + c)?.value ?? '').trim();
+  const nome = v('nome').replace(/\s+/g,' ');
+  if(!nome){ alert('Informe o nome do fornecedor.'); document.getElementById('c-nome').focus(); return; }
+
+  const dados = {};
+  Object.keys(CAMPOS_VAZIOS).forEach(c => { if(c !== 'id') dados[c] = v(c); });
+  dados.nome = nome;
+
+  if(editando){
+    const i = DOC.fornecedores.findIndex(x => x.id === editando);
+    DOC.fornecedores[i] = Object.assign({}, DOC.fornecedores[i], dados);
+  } else {
+    if(DOC.fornecedores.some(x => chave(x.nome) === chave(nome)) &&
+       !confirm('Já existe um fornecedor com esse nome. Cadastrar mesmo assim?')) return;
+    const usados = new Set(DOC.fornecedores.map(x => x.id));
+    DOC.fornecedores.push(normalizar(Object.assign({id: idDe(nome, usados)}, dados)));
+  }
+  marcarSujo(); pintarChips(); render(); fechar();
+}
+
+function excluir(){
+  const f = DOC.fornecedores.find(x => x.id === editando);
+  if(!f || !confirm(`Excluir "${f.nome}" da base?`)) return;
+  DOC.fornecedores = DOC.fornecedores.filter(x => x.id !== editando);
+  marcarSujo(); pintarChips(); render(); fechar();
+}
+
+function fechar(){
   document.getElementById('modal').classList.remove('on');
   document.getElementById('veu').classList.remove('on');
   document.body.style.overflow = '';
-  if(!silencioso && location.hash) history.replaceState(null, '', location.pathname + location.search);
+  editando = null;
+}
+
+/* ---------- exportar / importar ---------- */
+function corpoJSON(){
+  return JSON.stringify({
+    atualizadoEm: DOC.atualizadoEm || new Date().toISOString().slice(0,10),
+    origem: DOC.origem || 'admin IRIS',
+    fornecedores: DOC.fornecedores.map(normalizar)
+  }, null, 1);
+}
+function baixar(nome, texto, tipo){
+  const url = URL.createObjectURL(new Blob([texto], {type: tipo}));
+  const a = document.createElement('a');
+  a.href = url; a.download = nome; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+function baixarJSON(){ baixar('dados.json', corpoJSON(), 'application/json;charset=utf-8'); }
+
+function baixarCSV(){
+  const cab = ['Fornecedor','STATUS','dt_agendamento','dt_treinamento','APP_INSTALADO','UTILIZANDO',
+    'Motivo N utilizacao','Tem sistema','Qual sistema','Celular Android/IOS','Frota','Rastreador GPS',
+    'Data inicio utilizacao','Empresa Rastreador','Telefone','Mes Treinamento','Dias desde Treinamento','Observacoes'];
+  const linhas = DOC.fornecedores.map(f => [f.nome,f.status,dataLonga(f.dtAgendamento),dataLonga(f.dtTreinamento),
+    f.app,f.uso,f.motivo,f.temSistema,f.qualSistema,f.celular,f.frota,f.gps,dataLonga(f.dtInicioUso),
+    f.empresaGps,f.telefone,mesAno(f.dtTreinamento),diasDesde(f.dtTreinamento) ?? '',f.obs]);
+  const csv = [cab].concat(linhas)
+    .map(l => l.map(c => `"${String(c ?? '').replace(/"/g,'""')}"`).join(';')).join('\r\n');
+  baixar('implantacao_iris.csv', '\uFEFF' + csv, 'text/csv;charset=utf-8');
+}
+
+function importar(e){
+  const arq = e.target.files[0];
+  if(!arq) return;
+  const leitor = new FileReader();
+  leitor.onload = () => {
+    try{
+      const j = JSON.parse(leitor.result);
+      const lista = Array.isArray(j) ? j : j.fornecedores;
+      if(!Array.isArray(lista)) throw new Error('arquivo sem a lista "fornecedores"');
+      if(!confirm(`Substituir a base atual (${DOC.fornecedores.length}) pelos ${lista.length} registros do arquivo?`)) return;
+      const usados = new Set();
+      DOC = {
+        atualizadoEm: j.atualizadoEm || new Date().toISOString().slice(0,10),
+        origem: j.origem || arq.name,
+        fornecedores: lista.map(f => {
+          const n = normalizar(f);
+          n.id = n.id && !usados.has(n.id) ? n.id : idDe(n.nome, usados);
+          usados.add(n.id); return n;
+        })
+      };
+      marcarSujo(); pintarChips(); render();
+    }catch(err){ alert('Não foi possível ler o arquivo: ' + err.message); }
+    finally{ e.target.value = ''; }
+  };
+  leitor.readAsText(arq, 'utf-8');
+}
+
+/* ---------- publicação no GitHub ---------- */
+function lerCfg(){
+  try{
+    const c = JSON.parse(localStorage.getItem(K_GH) || '{}');
+    if(c.repo) document.getElementById('gh-repo').value = c.repo;
+    if(c.caminho) document.getElementById('gh-caminho').value = c.caminho;
+    if(c.branch) document.getElementById('gh-branch').value = c.branch;
+    if(c.token) document.getElementById('gh-token').value = c.token;
+  }catch(e){}
+}
+function gravarCfg(){
+  localStorage.setItem(K_GH, JSON.stringify({
+    repo: document.getElementById('gh-repo').value.trim(),
+    caminho: document.getElementById('gh-caminho').value.trim(),
+    branch: document.getElementById('gh-branch').value.trim(),
+    token: document.getElementById('gh-token').value.trim()
+  }));
+}
+function msgGH(tipo, texto){
+  document.getElementById('gh-msg').innerHTML =
+    `<div class="aviso ${tipo === 'ok' ? 'ok' : tipo === 'ruim' ? 'ruim' : ''}"><span>${tipo === 'ok' ? '&#10003;' : '&#9679;'}</span><div>${texto}</div></div>`;
+}
+function b64(texto){
+  const bytes = new TextEncoder().encode(texto);
+  let bin = '';
+  bytes.forEach(b => bin += String.fromCharCode(b));
+  return btoa(bin);
+}
+
+async function publicar(){
+  const repo = document.getElementById('gh-repo').value.trim().replace(/^https?:\/\/github\.com\//,'').replace(/\/$/,'');
+  const caminho = document.getElementById('gh-caminho').value.trim() || 'dados.json';
+  const branch = document.getElementById('gh-branch').value.trim() || 'main';
+  const token = document.getElementById('gh-token').value.trim();
+  if(!/^[^/]+\/[^/]+$/.test(repo) || !token){
+    msgGH('ruim','Preencha o repositório no formato <code>dono/nome</code> e o token.'); return;
+  }
+  const bt = document.getElementById('publicar');
+  bt.disabled = true; msgGH('', 'Publicando…');
+  const cab = {Authorization:'Bearer ' + token, Accept:'application/vnd.github+json', 'X-GitHub-Api-Version':'2022-11-28'};
+  const url = `https://api.github.com/repos/${repo}/contents/${encodeURIComponent(caminho).replace(/%2F/g,'/')}`;
+
+  try{
+    let sha = null;
+    const atual = await fetch(`${url}?ref=${encodeURIComponent(branch)}`, {headers: cab});
+    if(atual.ok) sha = (await atual.json()).sha;
+    else if(atual.status !== 404) throw new Error(`leitura falhou (${atual.status})`);
+
+    const r = await fetch(url, {
+      method:'PUT', headers: Object.assign({'Content-Type':'application/json'}, cab),
+      body: JSON.stringify({
+        message: `dados: base de implantação IRIS (${DOC.fornecedores.length} fornecedores)`,
+        content: b64(corpoJSON()), branch, sha
+      })
+    });
+    if(!r.ok){
+      const e = await r.json().catch(() => ({}));
+      throw new Error(`${r.status} — ${e.message || 'verifique token, repositório e branch'}`);
+    }
+    gravarCfg(); limparRascunho();
+    msgGH('ok','Publicado. O GitHub Pages leva até 1 minuto para servir o arquivo novo — depois disso a Consulta já mostra os dados atualizados.');
+  }catch(err){
+    msgGH('ruim','Não deu para publicar: ' + err.message + '. O rascunho continua salvo aqui — use <b>Baixar dados.json</b> como alternativa.');
+  }finally{ bt.disabled = false; }
 }
 </script>
 </body>
